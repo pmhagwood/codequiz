@@ -1,0 +1,85 @@
+/* Change the background color of the page */
+body {
+    background-color: #5770f1;
+    background-image: url("images/bg-quiz.gif");
+    background-size: cover;
+}
+/* drop the header down a bit */
+header {
+    margin-top: 10px;
+}
+/* background for the header bar and center text */
+#headerbar {
+    border:2px solid #788df2;
+    border-radius: 25px;
+    margin: 0px 20px;
+    background-image: linear-gradient( rgba(86,111,241,1),rgba(49,79,229,1));
+}
+/* Center and size h1 */
+#headerbar  h1 {
+        text-align: center;
+        padding:10px;
+        font-size:24px;
+        width: 90%;
+        border-bottom: 1px solid #788df2;
+        margin: 0px auto;
+}
+/* small title size */
+.smalltitle {
+    font-size: 10px;
+    color: aliceblue;
+}
+
+
+/* highscore style and timer */
+#enterhighscore {
+    font-size: 18px;
+    color: aliceblue;
+    padding-bottom: 10px;
+}
+.entertimer {
+    font-size: 18px;
+    color: aliceblue;
+    padding-bottom: 10px;
+}
+
+/* Questions Styling */
+
+#maincontent {
+    border:2px solid #eeeff5;
+    border-radius: 25px;
+    background-color: white;
+    padding: 15px;
+}
+
+#button {
+    display: block;
+    text-align: center;
+}
+
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    /* proper size of header bar for larger screens */
+    #headerbar {
+        width: 900px;
+        margin:0px auto;
+    }
+    /* position the timer to the right on larger screens */
+    #timer {
+        position: absolute;
+        right:0;
+        padding-right:50px;
+    }
+    #maincontent {
+        width:800px;
+        margin:0px auto;
+    }
+}
+
+/* Small devices (mobile, 768px and down) */
+@media only screen and (max-width: 765px) {
+    #maincontent {
+        margin:0px 20px;
+    }
+}
