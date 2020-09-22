@@ -29,6 +29,12 @@ header {
     font-size: 10px;
     color: aliceblue;
 }
+/* Style the questions */
+#questions {
+    font-size: 24px;
+    padding:20px 0px 40px 0px;
+    line-height: 2em;
+}
 
 
 /* highscore style and timer */
