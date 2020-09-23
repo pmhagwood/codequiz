@@ -1,100 +1,163 @@
 var quiz = {
     questions : [
-        "In CSS the box model is used for layout. Which of the following is NOT included in the box model?",
-        "Semantic HTML is used to clearly describe elements meaning to both the browser and developer. What elements are part of semantic HTML?",
-        "Pseudo-classes in CSS describe which of the following?",
+        "Which output method is most effective for debugging code in the browser?",
+        "What character is used to separate JavaScript statements?",
+        "In order for a Javascript function to run, we must ________ the function",
         "Javascript variables are containers used for storing data values.",
-        "Which of the following values would NOT be used to position an element using CSS?",
+        "A String contains characters surrounded by which of the following?",
         "What type of loop continues to run while a specified condition is true?"
     ],
     answers : [
-        ["Margin", "Padding", "Border", "Edge"],
-        ["Section", "Footer", "Aside", "All of the Above"],
-        ["Store data on a server", "Set the font-face of type", "Set the background color of the body tag", "Style an element when a user mouses over it"],
+        ["Source", "Call", "Carrier", "Console.log"],
+        ["period", "exclamation", "semi-colon", "hash-tag"],
+        ["Sound", "Point", "Invoke", "Move"],
         ["True", "False"],
-        ["Fixed", "Relative", "Near", "Absolute"],
+        ["Numbers", "Quotes", "Brackets", "Hash-tags"],
         ["For Loop", "In Loop", "While Loop", "If Loop"]
+    ],
+    correctAnswers : [
+        "Console.log",
+        "semi-colon",
+        "Invoke",
+        "True",
+        "Quotes",
+        "While Loop"
     ]
 };
 
+// set the question on and answer on
+var questionOn = 0;
+var answerOn = 0;
+var correctAnswer = quiz.correctAnswers[answerOn];
 
 
 // Create IntroScreen and Button to start time and questions
-var introEl = document.createElement('p');
-var intro2El = document.createElement('p');
-var intro3El = document.createElement('p');
 var startbtn = document.createElement('BUTTON');
 var currentTime;
 //test
 var currentTimebtn = document.createElement('BUTTON');
 
 // Target the content div
-var contentEl = document.getElementById('questions');
-var answersEl = document.getElementById('answers');
+var questionEl = document.getElementById('questions');
+var answer1El = document.getElementById('answer1');
+var answer2El = document.getElementById('answer2');
+var answer3El = document.getElementById('answer3');
+var answer4El = document.getElementById('answer4');
 var buttonEl = document.getElementById('button');
 var checktimeEl = document.getElementById('button');
+var mainContentEl = document.querySelector('#maincontent');
+var button1;
+var button2;
+var button3;
+var button4;
 
 // set content
-introEl.textContent = 'This quiz will test your knowledge of CSS, HTML, and JS. You will answer a series of multiple choice questions and you have 3 minutes to complete the quiz. '; 
-intro2El.textContent = 'If you get a question wrong, 10 seconds will be removed from the timer.';
-intro3El.textContent = 'Ready, set, go!';
+
 startbtn.innerHTML = 'START QUIZ!';
 currentTimebtn.innerHTML = 'Check Time';
 
 
 // attach elements to screen
-contentEl.appendChild(introEl);
-contentEl.appendChild(intro2El);
-contentEl.appendChild(intro3El);
 buttonEl.appendChild(startbtn);
-//Style elements
-introEl.setAttribute('style', 'font-size: 24px; padding-top: 20px; line-height: 2em');
-intro2El.setAttribute('style', 'font-size: 24px; line-height: 2em');
-intro3El.setAttribute('style', 'font-size: 28px; padding-bottom:40px; line-height: 2em; text-align:center; font-weight:bold');
-normalBg();
-
-// Change background function
-function changeBackground () {
-    startbtn.setAttribute('style', 'background-color: #4661e7; border:1px black; color: white; padding:5px 20px; border-radius: 8px; font-weight: bold;')
-}
-function normalBg () {
-    startbtn.setAttribute('style', 'background-color: #304fe5; border:1px black; color: white; padding:5px 20px; border-radius: 8px; font-weight: bold;')
-}
 
 
-// Rollover Effect for start button
-startbtn.addEventListener('mouseover', changeBackground);
-startbtn.addEventListener('mouseout', normalBg);
-startbtn.addEventListener('click', startGame);
-// Rollover Effect for checktime button
-currentTimebtn.addEventListener('mouseover', changeBackground);
-currentTimebtn.addEventListener('mouseout', normalBg);
-currentTimebtn.addEventListener('click', removeTime);
+
+
+//Event Listener to start the game
+// startbtn.addEventListener('click', startGame);
+//event listener to test removing time.
+// currentTimebtn.addEventListener('click', removeTime);
 
 
 // target timer text
 var timeEl = document.querySelector(".entertimer");
 // Set number of minutes in timer
-var setMinutes = 60 * 3;
+var setMinutes = 60 * 2;
+
 
 
 //start game 
 function startGame() {
     setTime(setMinutes);
-    contentEl.removeChild(introEl);
-    contentEl.removeChild(intro2El);
-    contentEl.removeChild(intro3El);
+    questionEl.textContent = quiz.questions[questionOn];
     buttonEl.removeChild(startbtn);
-    checktimeEl.appendChild(currentTimebtn);
-}
+    // checktimeEl.appendChild(currentTimebtn);
+    for(var i = 0; i < quiz.answers[0].length; i++){
+        var answer = quiz.answers[0][i];
+        button1 = document.createElement('button');
+        button2 = document.createElement('button');
+        button3 = document.createElement('button');
+        button4 = document.createElement('button');
 
-// remove time
-function removeTime(){
-    console.log('current time ', currentTime);
-    currentTime = currentTime - 10;
-    console.log('current time -10 is: ', currentTime);
+        if(i === 0){
+            answer1El.appendChild(button1);
+            button1.textContent = answer;
+        } else if(i === 1){
+            answer2El.appendChild(button2);
+            button2.textContent = answer;
+        } else if(i === 2){
+            answer3El.appendChild(button3);
+            button3.textContent = answer;
+        } else {
+            answer4El.appendChild(button4);
+            button4.textContent = answer;
+        };
+    
+    };
+};
+
+// Move to next question 
+function nextQuestion() {
+    questionEl.textContent = quiz.questions[questionOn];
+    correctAnswer = quiz.correctAnswers[answerOn];
+    console.log('correct answer is: ', correctAnswer);
+    for(var j = 0; j < quiz.answers[answerOn].length; j++){
+        var answer = quiz.answers[answerOn][j];
+
+        if(j === 0){
+            button1.textContent = answer;
+            console.log(button1.textContent);
+        } else if(j === 1){
+            button2.textContent = answer;
+            console.log(button2.textContent);
+        } else if(j === 2){
+            button3.textContent = answer;
+            console.log(button3.textContent);
+        } else {
+            button4.textContent = answer;
+            console.log(button4.textContent);
+        };
+    };
     setTime(currentTime);
 }
+
+// When a button inside the maincontent is clicked
+mainContentEl.addEventListener('click', function(event){
+    var element = event.target;
+    // If that element button is clicked...
+    console.log('correct answer is: ', correctAnswer);
+    if(element.textContent === startbtn.textContent){
+        startGame();
+    } else if(element.textContent === correctAnswer) {
+        questionOn++;
+        answerOn++;
+        console.log('question on: ', questionOn);
+        console.log('answer on: ', answerOn);
+        nextQuestion();
+    } else {
+        console.log('wrong');
+        currentTime = currentTime - 10;
+        questionOn++;
+        answerOn++;
+        nextQuestion();
+    }
+});
+
+// remove time
+// function removeTime(){
+//     currentTime = currentTime - 10;
+//     setTime(currentTime);
+// }
 
 // create timer
 function setTime(duration) {

@@ -33,18 +33,18 @@ header {
 #questions {
     font-size: 24px;
     padding:20px 0px 40px 0px;
-    line-height: 2em;
+    line-height: 1.4em;
 }
 
 
 /* highscore style and timer */
 #enterhighscore {
-    font-size: 18px;
+    font-size: 26px;
     color: aliceblue;
     padding-bottom: 10px;
 }
 .entertimer {
-    font-size: 18px;
+    font-size: 26px;
     color: aliceblue;
     padding-bottom: 10px;
 }
@@ -61,6 +61,56 @@ header {
 #button {
     display: block;
     text-align: center;
+}
+#answer1, #answer2, #answer3, #answer4 {
+    margin-left: 5%;
+}
+/* style buttons */
+#button button {
+    background-color: #304fe5;
+    border:2px solid #1e233e;
+    color: white;
+    padding:8px 26px;
+    border-radius: 8px;
+    font-weight: bold;
+    display: inline-block;
+    text-decoration: none;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+#button button:hover {
+    background-color: #516bed;
+    color:white;
+}
+#answer1 button, #answer2 button, #answer3 button, #answer4 button {
+    background-color: #304fe5;
+    border:2px solid #1e233e;
+    color: white;
+    padding:8px 26px;
+    border-radius: 8px;
+    font-weight: bold;
+    display: inline-block;
+    text-decoration: none;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+#answer1 button:hover {
+    background-color: #516bed;
+    color:white;
+}
+#answer2 button:hover {
+    background-color: #516bed;
+    color:white;
+}
+#answer3 button:hover {
+    background-color: #516bed;
+    color:white;
+}
+#answer4 button:hover {
+    background-color: #516bed;
+    color:white;
 }
 
 
