@@ -3,7 +3,7 @@ var quiz = {
         "Which output method is most effective for debugging code in the browser?",
         "What character is used to separate JavaScript statements?",
         "In order for a Javascript function to run, we must ________ the function",
-        "Javascript variables are containers used for storing data values.",
+        "Javascript variables are often referred to as...?",
         "A String contains characters surrounded by which of the following?",
         "What type of loop continues to run while a specified condition is true?"
     ],
@@ -11,7 +11,7 @@ var quiz = {
         ["Source", "Call", "Carrier", "Console.log"],
         ["period", "exclamation", "semi-colon", "hash-tag"],
         ["Sound", "Point", "Invoke", "Move"],
-        ["True", "False"],
+        ["Containers", "Rooms", "Rainbows", "Unicorns"],
         ["Numbers", "Quotes", "Brackets", "Hash-tags"],
         ["For Loop", "In Loop", "While Loop", "If Loop"]
     ],
@@ -19,7 +19,7 @@ var quiz = {
         "Console.log",
         "semi-colon",
         "Invoke",
-        "True",
+        "Containers",
         "Quotes",
         "While Loop"
     ]
@@ -50,6 +50,10 @@ var button1;
 var button2;
 var button3;
 var button4;
+var minutes;
+var seconds;
+var timerInterval;
+var score;
 
 // set content
 
@@ -72,12 +76,13 @@ buttonEl.appendChild(startbtn);
 // target timer text
 var timeEl = document.querySelector(".entertimer");
 // Set number of minutes in timer
-var setMinutes = 60 * 2;
+var setMinutes = 60 * 1;
 
 
 
 //start game 
 function startGame() {
+    console.log('start getting called.');
     setTime(setMinutes);
     questionEl.textContent = quiz.questions[questionOn];
     buttonEl.removeChild(startbtn);
@@ -88,6 +93,10 @@ function startGame() {
         button2 = document.createElement('button');
         button3 = document.createElement('button');
         button4 = document.createElement('button');
+        button1.setAttribute('id', 'button1');
+        button2.setAttribute('id', 'button2');
+        button3.setAttribute('id', 'button3');
+        button4.setAttribute('id', 'button4');
 
         if(i === 0){
             answer1El.appendChild(button1);
@@ -108,27 +117,58 @@ function startGame() {
 
 // Move to next question 
 function nextQuestion() {
-    questionEl.textContent = quiz.questions[questionOn];
-    correctAnswer = quiz.correctAnswers[answerOn];
-    console.log('correct answer is: ', correctAnswer);
-    for(var j = 0; j < quiz.answers[answerOn].length; j++){
-        var answer = quiz.answers[answerOn][j];
+    console.log('questiongs length is', quiz.questions.length);
+    console.log('question on is ', questionOn);
+    if(questionOn <= (quiz.questions.length - 1)){
+        questionEl.textContent = quiz.questions[questionOn];
+        correctAnswer = quiz.correctAnswers[answerOn];
+        console.log('correct answer is: ', correctAnswer);
+        var button1 = document.getElementById('button1');
+        var button2 = document.getElementById('button2');
+        var button3 = document.getElementById('button3');
+        var button4 = document.getElementById('button4');
+        for(var j = 0; j < quiz.answers[answerOn].length; j++){
+            var answer = quiz.answers[answerOn][j];
 
-        if(j === 0){
-            button1.textContent = answer;
-            console.log(button1.textContent);
-        } else if(j === 1){
-            button2.textContent = answer;
-            console.log(button2.textContent);
-        } else if(j === 2){
-            button3.textContent = answer;
-            console.log(button3.textContent);
-        } else {
-            button4.textContent = answer;
-            console.log(button4.textContent);
+            if(j === 0){
+                button1.textContent = answer;
+                console.log("button 1 is: ", button1.textContent);
+            } else if(j === 1){
+                button2.textContent = answer;
+                console.log("button 2 is: ", button2.textContent);
+            } else if(j === 2){
+                button3.textContent = answer;
+                console.log("button 3 is: ", button3.textContent);
+            } else if(j === 3){
+                button4.textContent = answer;
+                console.log("button 4 is: ", button4.textContent);
+            } else {
+                console.log('test');
+            };
         };
-    };
-    setTime(currentTime);
+        setTime(currentTime);
+    } else {
+        endGame();
+    }
+}
+
+//End Game
+function endGame(){
+    clearInterval(timerInterval);
+    score = currentTime;
+    button1 = document.getElementById('button1');
+    button1.remove();
+    button2 = document.getElementById('button2');
+    button2.remove();
+    button3 = document.getElementById('button3');
+    button3.remove();
+    button4 = document.getElementById('button4');
+    button4.remove();
+    console.log('score is: ', score);
+    questionEl.textContent = "Game Over"
+    questionEl.setAttribute('style', 'font-size:45px; text-align:center;');
+    answer1El.textContent = ('Your Score is ' + score + '!');
+    answer1El.setAttribute('style', 'font-size:24px; text-align:center; margin-left:-1%;')
 }
 
 // When a button inside the maincontent is clicked
@@ -153,11 +193,6 @@ mainContentEl.addEventListener('click', function(event){
     }
 });
 
-// remove time
-// function removeTime(){
-//     currentTime = currentTime - 10;
-//     setTime(currentTime);
-// }
 
 // create timer
 function setTime(duration) {
@@ -179,6 +214,7 @@ function setTime(duration) {
         if (--timer < 0) {
             clearInterval(timerInterval);
             timeEl.textContent = 00 + ":" + 00;
+            endGame();
         }
     }, 1000);
 }
