@@ -59,7 +59,20 @@ var minutes;
 var seconds;
 var timerInterval;
 var score;
+// store the high scores
+var scoresList = [];
 
+init();
+
+function init(){
+    var storedScores = localStorage.getItem("scoresList");
+    console.log('stored scores : ', storedScores);
+
+    if(storedScores !== null) {
+        scoresList.push(storedScores);
+        console.log('scores List is : ', scoresList)
+    }
+}
 
 // set content
 
@@ -178,45 +191,34 @@ function displayMessage(message) {
     questionEl.textContent = message;
   }
   
-  
-//   function renderLastRegistered() {
-//     // Fill in code here to retrieve the last email and password.
-//     // If they are null, return early from this function
-//     // Else set the text of the userEmailSpan and userPasswordSpan 
-//     // to the corresponding values form local storgage
-//     var initialsEl = localStorage.getItem("email");
-//     // this if statement will drop out of the function early. If they don't have an email or passoword, exit the function early
-//     if(!email || !password){
-//       return;
-//     }
-//     //write them to the html screen
-//     userEmailSpan.textContent = userEmail;
-//   }
+
 
 // Submit Initials
 submitBtn.addEventListener("click", function(event) {
+    event.preventDefault();
+
+    
     // get the value for initials
     var initialsEl = document.querySelector('#initialstext').value;
-    console.log("initials are:", initialsEl);
+    // put initials and score into array
+    scoresList.push(initialsEl + " : score " + score);
     // if it is empty, show messages
     if (initialsEl === "") {
       displayMessage("Please enter your Initials");
     } else {
       displayMessage("Registered successfully");
     }
-  
-//     // Save email and password to localStorage and render the last registered.
-//     // set the email and password to the values that were entered. 
-//     localStorage.setItem("initials", initialsEl);
     
-//     // call the function to set the last email and password entered when the button is clicked. 
+    
+    // Save the initials to local storage.
+    localStorage.setItem("scoresList", JSON.stringify(scoresList));
+    
+    // call the function to set the initials and score when button is clicked.
 //     renderLastRegistered();
 //     }
+    location.href = "highscores.html";
 });
 
-
-// //Click to record Highscore
-// submitinitials.addEventListener('click', highScore);
 
 // When a button inside the maincontent is clicked
 mainContentEl.addEventListener('click', function(event){
