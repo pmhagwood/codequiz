@@ -44,8 +44,13 @@ var answer2El = document.getElementById('answer2');
 var answer3El = document.getElementById('answer3');
 var answer4El = document.getElementById('answer4');
 var buttonEl = document.getElementById('button');
+var highscoreEl = document.getElementById('highscoreform');
 var checktimeEl = document.getElementById('button');
 var mainContentEl = document.querySelector('#maincontent');
+// Target the form and form button
+var initialsEl = document.querySelector('#initialstext');
+var submitBtn = document.querySelector('#submitinitials');
+
 var button1;
 var button2;
 var button3;
@@ -54,6 +59,7 @@ var minutes;
 var seconds;
 var timerInterval;
 var score;
+
 
 // set content
 
@@ -65,12 +71,6 @@ currentTimebtn.innerHTML = 'Check Time';
 buttonEl.appendChild(startbtn);
 
 
-
-
-//Event Listener to start the game
-// startbtn.addEventListener('click', startGame);
-//event listener to test removing time.
-// currentTimebtn.addEventListener('click', removeTime);
 
 
 // target timer text
@@ -155,6 +155,7 @@ function nextQuestion() {
 //End Game
 function endGame(){
     clearInterval(timerInterval);
+    // mainContentEl.removeEventListener('click');
     score = currentTime;
     button1 = document.getElementById('button1');
     button1.remove();
@@ -165,31 +166,86 @@ function endGame(){
     button4 = document.getElementById('button4');
     button4.remove();
     console.log('score is: ', score);
+    timeEl.textContent = score;
     questionEl.textContent = "Game Over"
     questionEl.setAttribute('style', 'font-size:45px; text-align:center;');
     answer1El.textContent = ('Your Score is ' + score + '!');
     answer1El.setAttribute('style', 'font-size:24px; text-align:center; margin-left:-1%;')
+    highscoreEl.setAttribute('style', 'visibility: visible; text-align:center; font-weight:bold; padding:40px; 0px;')
 }
+
+function displayMessage(message) {
+    questionEl.textContent = message;
+  }
+  
+  
+//   function renderLastRegistered() {
+//     // Fill in code here to retrieve the last email and password.
+//     // If they are null, return early from this function
+//     // Else set the text of the userEmailSpan and userPasswordSpan 
+//     // to the corresponding values form local storgage
+//     var initialsEl = localStorage.getItem("email");
+//     // this if statement will drop out of the function early. If they don't have an email or passoword, exit the function early
+//     if(!email || !password){
+//       return;
+//     }
+//     //write them to the html screen
+//     userEmailSpan.textContent = userEmail;
+//   }
+
+// Submit Initials
+submitBtn.addEventListener("click", function(event) {
+    // get the value for initials
+    var initialsEl = document.querySelector('#initialstext').value;
+    console.log("initials are:", initialsEl);
+    // if it is empty, show messages
+    if (initialsEl === "") {
+      displayMessage("Please enter your Initials");
+    } else {
+      displayMessage("Registered successfully");
+    }
+  
+//     // Save email and password to localStorage and render the last registered.
+//     // set the email and password to the values that were entered. 
+//     localStorage.setItem("initials", initialsEl);
+    
+//     // call the function to set the last email and password entered when the button is clicked. 
+//     renderLastRegistered();
+//     }
+});
+
+
+// //Click to record Highscore
+// submitinitials.addEventListener('click', highScore);
 
 // When a button inside the maincontent is clicked
 mainContentEl.addEventListener('click', function(event){
+    event.preventDefault();
     var element = event.target;
     // If that element button is clicked...
-    console.log('correct answer is: ', correctAnswer);
-    if(element.textContent === startbtn.textContent){
-        startGame();
-    } else if(element.textContent === correctAnswer) {
-        questionOn++;
-        answerOn++;
-        console.log('question on: ', questionOn);
-        console.log('answer on: ', answerOn);
-        nextQuestion();
-    } else {
-        console.log('wrong');
-        currentTime = currentTime - 10;
-        questionOn++;
-        answerOn++;
-        nextQuestion();
+    if(event.target.matches("#submitinitials")){
+        return
+    };
+    if(event.target.matches("button")) {
+            console.log('correct answer is: ', correctAnswer);
+            if(element.textContent === startbtn.textContent){
+                startGame();
+            } else if(element.textContent === correctAnswer) {
+                questionOn++;
+                answerOn++;
+                console.log('question on: ', questionOn);
+                console.log('answer on: ', answerOn);
+                feedbackEl = document.getElementById('button4');
+                // feedbackEl.textContent === "Correct!";
+                nextQuestion();
+            } else {
+                console.log('wrong');
+                currentTime = currentTime - 10;
+                questionOn++;
+                answerOn++;
+                // feedbackEl.textContent === "InCorrect"
+                nextQuestion();
+            } 
     }
 });
 

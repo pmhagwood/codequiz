@@ -24,6 +24,14 @@ header {
         border-bottom: 1px solid #788df2;
         margin: 0px auto;
 }
+/* style header link */
+#enterhighscore a {
+    text-decoration: none;
+    color: whitesmoke;
+}
+#enterhighscore a:hover {
+    color: #cad1f5;
+}
 /* small title size */
 .smalltitle {
     font-size: 10px;
@@ -48,8 +56,18 @@ header {
     color: aliceblue;
     padding-bottom: 10px;
 }
+#highscoreform {
+    visibility: hidden;
+}
+#feedback {
+    width: 80%;
+    color: rgb(109, 109, 109);
+    margin-top: 20px;
+    text-align: center;
+    font-size: 12px;
+}
 
-/* Questions Styling */
+/* Content Styling */
 
 #maincontent {
     border:2px solid #eeeff5;
@@ -57,15 +75,19 @@ header {
     background-color: white;
     padding: 15px;
 }
-
-#button {
-    display: block;
-    text-align: center;
+#highscores h2 {
+    margin: 10px 0px 30px 0px;
 }
+
+/* indent questions */
 #answer1, #answer2, #answer3, #answer4 {
     margin-left: 5%;
 }
 /* style buttons */
+#button {
+    display: block;
+    text-align: center;
+}
 #button button {
     background-color: #304fe5;
     border:2px solid #1e233e;
@@ -83,7 +105,7 @@ header {
     background-color: #516bed;
     color:white;
 }
-#answer1 button, #answer2 button, #answer3 button, #answer4 button {
+#answer1 button, #answer2 button, #answer3 button, #answer4 button, #highscores button, #submitinitials {
     background-color: #304fe5;
     border:2px solid #1e233e;
     color: white;
@@ -112,6 +134,21 @@ header {
     background-color: #516bed;
     color:white;
 }
+#highscores button:hover {
+    background-color: #516bed;
+    color:white;
+}
+#highscoreform button:hover {
+    background-color: #516bed;
+    color:white;
+}
+#highscores button {
+    margin-right:10px;
+}
+#submitinitials {
+    margin-left:10px;
+}
+
 
 
 /* Medium devices (landscape tablets, 768px and up) */
