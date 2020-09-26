@@ -19,10 +19,12 @@ header {
 #headerbar  h1 {
         text-align: center;
         padding:10px;
-        font-size:24px;
+        font-size:29px;
         width: 90%;
         border-bottom: 1px solid #788df2;
         margin: 0px auto;
+        font-family: 'Bangers', cursive;
+        letter-spacing: .1em;
 }
 /* style header link */
 #enterhighscore a {
@@ -43,7 +45,10 @@ header {
     padding:20px 0px 40px 0px;
     line-height: 1.4em;
 }
-
+#questions p:nth-child(3) {
+    text-align: center;
+    font-weight: bold;
+  }
 
 /* highscore style and timer */
 #enterhighscore {
@@ -60,11 +65,10 @@ header {
     visibility: hidden;
 }
 #feedback {
-    width: 80%;
-    color: rgb(109, 109, 109);
+    color: rgb(84, 84, 84);
     margin-top: 20px;
     text-align: center;
-    font-size: 12px;
+    font-size: 16px;
 }
 
 /* Content Styling */
@@ -149,6 +153,12 @@ header {
     margin-left:10px;
 }
 
+/* HighScores List Look */
+#hslist {
+    list-style-image: url('images/lightbulb-small.png');
+    font-size: 1.4em;
+    color:#354edc;
+}
 
 
 /* Medium devices (landscape tablets, 768px and up) */

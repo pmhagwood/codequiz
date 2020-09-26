@@ -48,6 +48,7 @@ var highscoreEl = document.getElementById('highscoreform');
 var checktimeEl = document.getElementById('button');
 var mainContentEl = document.querySelector('#maincontent');
 var feedbackEl = document.getElementById('feedback');
+console.log('the feedback element is ', feedbackEl);
 // Target the form and form button
 var initialsEl = document.querySelector('#initialstext');
 var submitBtn = document.querySelector('#submitinitials');
@@ -62,11 +63,11 @@ var timerInterval;
 var score;
 // store the high scores
 var scoresList = [];
-
+// This is where get scores from local storage and push in a new one. If I don't use Push, it breaks the array and get an error
 init();
-
+// this gets the scores from storage and pushes them into the array, keeping it an array.
 function init(){
-    var storedScores = localStorage.getItem("scoresList");
+    var storedScores = JSON.parse(localStorage.getItem("scoresList"));
     console.log('stored scores : ', storedScores);
 
     if(storedScores !== null) {
@@ -133,7 +134,7 @@ function startGame() {
 // Move to next question 
 function nextQuestion() {
     // loop to replace buttons and set text
-    feedbackEl.textContent = " ";
+    //feedbackEl.textContent = " ";
     if(questionOn <= (quiz.questions.length - 1)){
         questionEl.textContent = quiz.questions[questionOn];
         correctAnswer = quiz.correctAnswers[answerOn];
@@ -204,7 +205,7 @@ submitBtn.addEventListener("click", function(event) {
     if (initialsEl === "") {
       displayMessage("Please enter your Initials");
     } else {
-      displayMessage("Registered successfully");
+      displayMessage("");
     }
     
     
@@ -233,16 +234,24 @@ mainContentEl.addEventListener('click', function(event){
                 questionOn++;
                 answerOn++;
                 feedbackEl.textContent = "Correct!";
-                nextQuestion();
+                clearFeedback();
             } else {
                 currentTime = currentTime - 10;
+                console.log("current time is ",currentTime)
                 questionOn++;
                 answerOn++;
-                feedbackEl.textContent = "InCorrect"
-                nextQuestion();
+                feedbackEl.textContent = "InCorrect";
+                clearFeedback();
             } 
     }
 });
+
+function clearFeedback (){
+    setTimeout(function(){
+        feedbackEl.textContent = "";
+        nextQuestion();
+       }, 1000);
+};
 
 
 // create timer

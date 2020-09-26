@@ -29,7 +29,7 @@ function renderHighscores() {
     // render the content into paragraphs
     for(var i = 0; i < scores.length; i++) {
         var score = scores[i];
-
+        console.log("score is ", score);
         var li = document.createElement("li");
         li.textContent = score;
         li.setAttribute("data-index", i);
@@ -44,5 +44,6 @@ clearBtn.addEventListener('click', function(event){
 
     if(element.matches("button") === true){
         localStorage.clear();
+        location.reload();
     }
 })
