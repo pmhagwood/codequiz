@@ -47,6 +47,7 @@ var buttonEl = document.getElementById('button');
 var highscoreEl = document.getElementById('highscoreform');
 var checktimeEl = document.getElementById('button');
 var mainContentEl = document.querySelector('#maincontent');
+var feedbackEl = document.getElementById('feedback');
 // Target the form and form button
 var initialsEl = document.querySelector('#initialstext');
 var submitBtn = document.querySelector('#submitinitials');
@@ -93,13 +94,14 @@ var setMinutes = 60 * 1;
 
 
 
-//start game 
+// function to start game
 function startGame() {
-    console.log('start getting called.');
+    // set the timer
     setTime(setMinutes);
+    // remove the question text
     questionEl.textContent = quiz.questions[questionOn];
     buttonEl.removeChild(startbtn);
-    // checktimeEl.appendChild(currentTimebtn);
+    // loop to create buttons and button text
     for(var i = 0; i < quiz.answers[0].length; i++){
         var answer = quiz.answers[0][i];
         button1 = document.createElement('button');
@@ -130,12 +132,12 @@ function startGame() {
 
 // Move to next question 
 function nextQuestion() {
-    console.log('questiongs length is', quiz.questions.length);
-    console.log('question on is ', questionOn);
+    // loop to replace buttons and set text
+    feedbackEl.textContent = " ";
     if(questionOn <= (quiz.questions.length - 1)){
         questionEl.textContent = quiz.questions[questionOn];
         correctAnswer = quiz.correctAnswers[answerOn];
-        console.log('correct answer is: ', correctAnswer);
+        // console.log('correct answer is: ', correctAnswer);
         var button1 = document.getElementById('button1');
         var button2 = document.getElementById('button2');
         var button3 = document.getElementById('button3');
@@ -145,16 +147,12 @@ function nextQuestion() {
 
             if(j === 0){
                 button1.textContent = answer;
-                console.log("button 1 is: ", button1.textContent);
             } else if(j === 1){
                 button2.textContent = answer;
-                console.log("button 2 is: ", button2.textContent);
             } else if(j === 2){
                 button3.textContent = answer;
-                console.log("button 3 is: ", button3.textContent);
             } else if(j === 3){
                 button4.textContent = answer;
-                console.log("button 4 is: ", button4.textContent);
             } else {
                 console.log('test');
             };
@@ -211,7 +209,7 @@ submitBtn.addEventListener("click", function(event) {
     
     
     // Save the initials to local storage.
-    localStorage.setItem("scoresList", JSON.stringify(scoresList));
+    window.localStorage.setItem("scoresList", JSON.stringify(scoresList));
     
     // call the function to set the initials and score when button is clicked.
 //     renderLastRegistered();
@@ -229,23 +227,18 @@ mainContentEl.addEventListener('click', function(event){
         return
     };
     if(event.target.matches("button")) {
-            console.log('correct answer is: ', correctAnswer);
             if(element.textContent === startbtn.textContent){
                 startGame();
             } else if(element.textContent === correctAnswer) {
                 questionOn++;
                 answerOn++;
-                console.log('question on: ', questionOn);
-                console.log('answer on: ', answerOn);
-                feedbackEl = document.getElementById('button4');
-                // feedbackEl.textContent === "Correct!";
+                feedbackEl.textContent = "Correct!";
                 nextQuestion();
             } else {
-                console.log('wrong');
                 currentTime = currentTime - 10;
                 questionOn++;
                 answerOn++;
-                // feedbackEl.textContent === "InCorrect"
+                feedbackEl.textContent = "InCorrect"
                 nextQuestion();
             } 
     }

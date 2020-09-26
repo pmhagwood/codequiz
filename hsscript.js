@@ -3,17 +3,16 @@
 var hsListEl = document.getElementById('hslist');
 var clearBtn = document.getElementById('clearhs');
 
-console.log('hsListEl', hsListEl);
 
-
+// array to store scores
 var scores = [];
 
-
+// initialize the scores array
 init();
-
+// function to initialize the scores array
 function init() {
     // get the score list from storage
-    var storedScores = JSON.parse(localStorage.getItem("scoresList"));
+    var storedScores = JSON.parse(window.localStorage.getItem("scoresList"));
     console.log('Scores list ', storedScores);
     // If scores were found, update scores array with it. 
     if(storedScores !== null){
@@ -22,7 +21,7 @@ function init() {
     renderHighscores();
 }
 
-
+// render out the high scores
 function renderHighscores() {
 // set html to nothing
     hsListEl.innerHTML = "";
