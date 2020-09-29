@@ -52,6 +52,10 @@ console.log('the feedback element is ', feedbackEl);
 // Target the form and form button
 var initialsEl = document.querySelector('#initialstext');
 var submitBtn = document.querySelector('#submitinitials');
+//Target highscore page items.
+// get the spot in html of where to place the list
+var hsListEl = document.getElementById('hslist');
+var clearBtn = document.getElementById('clearhs');
 
 var button1;
 var button2;
@@ -68,11 +72,9 @@ init();
 // this gets the scores from storage and pushes them into the array, keeping it an array.
 function init(){
     var storedScores = JSON.parse(localStorage.getItem("scoresList"));
-    console.log('stored scores : ', storedScores);
 
     if(storedScores !== null) {
         scoresList.push(storedScores);
-        console.log('scores List is : ', scoresList)
     }
 }
 
@@ -159,6 +161,7 @@ function nextQuestion() {
             };
         };
         setTime(currentTime);
+        console.log("currenttime is ", currentTime);
     } else {
         endGame();
     }
@@ -167,6 +170,7 @@ function nextQuestion() {
 //End Game
 function endGame(){
     clearInterval(timerInterval);
+    feedbackEl.textContent = "";
     // mainContentEl.removeEventListener('click');
     score = currentTime;
     button1 = document.getElementById('button1');
@@ -234,24 +238,31 @@ mainContentEl.addEventListener('click', function(event){
                 questionOn++;
                 answerOn++;
                 feedbackEl.textContent = "Correct!";
-                clearFeedback();
+                setTimeout(function(){
+                    feedbackEl.textContent = "";
+                   }, 1000);
+                nextQuestion();
             } else {
                 currentTime = currentTime - 10;
                 console.log("current time is ",currentTime)
                 questionOn++;
                 answerOn++;
                 feedbackEl.textContent = "InCorrect";
-                clearFeedback();
+                setTimeout(function(){
+                    feedbackEl.textContent = "";
+                    
+                   }, 1000);
+                nextQuestion();
             } 
     }
 });
 
-function clearFeedback (){
-    setTimeout(function(){
-        feedbackEl.textContent = "";
-        nextQuestion();
-       }, 1000);
-};
+// function clearFeedback (){
+//     setTimeout(function(){
+//         feedbackEl.textContent = "";
+//         nextQuestion();
+//        }, 1000);
+// };
 
 
 // create timer
