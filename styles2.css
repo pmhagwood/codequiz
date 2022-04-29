@@ -16,7 +16,7 @@ header {
 /* QUIZ TITLE */
 
 .quiztitle {
-    background-image: url(/images/wordbubble.svg);
+    background-image: url(images/wordbubble.svg);
     background-position: center; 
     background-repeat: no-repeat; 
     background-size: contain;
