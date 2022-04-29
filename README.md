@@ -10,4 +10,4 @@ Live site can be accessed here [livesite](https://pmhagwood.github.io/codequiz/)
 
 The game is optimized for a mobile view [Code Quiz Screencapture](https://github.com/pmhagwood/codequiz/blob/master/gameplay.jpg)
 
-<img src="images/codequiz.png"  alt="screencapture of code quiz game">
+<img src="images/gameplay.jpg"  alt="screencapture of code quiz game">
