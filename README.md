@@ -8,6 +8,6 @@ This directory contains a timed code quiz. I worked to create a code quiz with J
 The CodeQuiz can be accessed here [portfolio](https://github.com/pmhagwood/codequiz)
 Live site can be accessed here [livesite](https://pmhagwood.github.io/codequiz/)
 
-Screen capture of the Code Quiz Game [Code Quiz Screencapture](https://github.com/pmhagwood/codequiz/blob/master/codequiz.png)
+The game is optimized for a mobile view [Code Quiz Screencapture](https://github.com/pmhagwood/codequiz/blob/master/gameplay.jpg)
 
 <img src="images/codequiz.png"  alt="screencapture of code quiz game">
