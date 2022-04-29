@@ -26,9 +26,9 @@ var quiz = {
 };
 
 // set the question on and answer on
-var questionOn = 0;
-var answerOn = 0;
-var correctAnswer = quiz.correctAnswers[answerOn];
+let questionOn = 0;
+let answerOn = 0;
+let correctAnswer = quiz.correctAnswers[answerOn];
 
 
 // Create IntroScreen and Button to start time and questions
@@ -52,6 +52,10 @@ console.log('the feedback element is ', feedbackEl);
 // Target the form and form button
 var initialsEl = document.querySelector('#initialstext');
 var submitBtn = document.querySelector('#submitinitials');
+//Target highscore page items.
+// get the spot in html of where to place the list
+var hsListEl = document.getElementById('hslist');
+var clearBtn = document.getElementById('clearhs');
 
 var button1;
 var button2;
@@ -68,12 +72,11 @@ init();
 // this gets the scores from storage and pushes them into the array, keeping it an array.
 function init(){
     var storedScores = JSON.parse(localStorage.getItem("scoresList"));
-    console.log('stored scores : ', storedScores);
 
     if(storedScores !== null) {
-        scoresList.push(storedScores);
-        console.log('scores List is : ', scoresList)
+        scoresList = storedScores;
     }
+    // renderHighscores();
 }
 
 // set content
@@ -93,7 +96,7 @@ var timeEl = document.querySelector(".entertimer");
 // Set number of minutes in timer
 var setMinutes = 60 * 1;
 
-
+startGame();
 
 // function to start game
 function startGame() {
@@ -159,6 +162,7 @@ function nextQuestion() {
             };
         };
         setTime(currentTime);
+        console.log("currenttime is ", currentTime);
     } else {
         endGame();
     }
@@ -167,6 +171,7 @@ function nextQuestion() {
 //End Game
 function endGame(){
     clearInterval(timerInterval);
+    feedbackEl.textContent = "";
     // mainContentEl.removeEventListener('click');
     score = currentTime;
     button1 = document.getElementById('button1');
@@ -182,7 +187,7 @@ function endGame(){
     questionEl.textContent = "Game Over"
     questionEl.setAttribute('style', 'font-size:45px; text-align:center;');
     answer1El.textContent = ('Your Score is ' + score + '!');
-    answer1El.setAttribute('style', 'font-size:24px; text-align:center; margin-left:-1%;')
+    answer1El.setAttribute('style', 'font-size:24px; text-align:center; margin-left:-1%; color: white;')
     highscoreEl.setAttribute('style', 'visibility: visible; text-align:center; font-weight:bold; padding:40px; 0px;')
 }
 
@@ -233,25 +238,35 @@ mainContentEl.addEventListener('click', function(event){
             } else if(element.textContent === correctAnswer) {
                 questionOn++;
                 answerOn++;
+                feedbackEl.classList.add('feedbackview');
                 feedbackEl.textContent = "Correct!";
-                clearFeedback();
+                setTimeout(function(){
+                    feedbackEl.textContent = "";
+                    feedbackEl.classList.remove('feedbackview');
+                   }, 1500);
+                nextQuestion();
             } else {
                 currentTime = currentTime - 10;
                 console.log("current time is ",currentTime)
                 questionOn++;
                 answerOn++;
+                feedbackEl.classList.add('feedbackview')
                 feedbackEl.textContent = "InCorrect";
-                clearFeedback();
+                setTimeout(function(){
+                    feedbackEl.textContent = "";
+                    feedbackEl.classList.remove('feedbackview')
+                   }, 1500);
+                nextQuestion();
             } 
     }
 });
 
-function clearFeedback (){
-    setTimeout(function(){
-        feedbackEl.textContent = "";
-        nextQuestion();
-       }, 1000);
-};
+// function clearFeedback (){
+//     setTimeout(function(){
+//         feedbackEl.textContent = "";
+//         nextQuestion();
+//        }, 1000);
+// };
 
 
 // create timer
@@ -278,3 +293,33 @@ function setTime(duration) {
         }
     }, 1000);
 }
+
+
+// render out the high scores
+function renderHighscores() {
+    // set html to nothing
+        hsListEl.innerHTML = "";
+    
+        // render the content into paragraphs
+        for(var i = 0; i < scores.length; i++) {
+            var score = scoresList[i];
+            console.log("score is ", score);
+            var li = document.createElement("li");
+            li.textContent = score;
+            li.setAttribute("data-index", i);
+    
+            hsListEl.appendChild(li);
+    
+        }
+    }
+    if(clearBtn){
+        clearBtn.addEventListener('click', function(event){
+            let element = event.target;
+        
+            if(element.matches("button") === true){
+                localStorage.clear();
+                location.reload();
+            }
+        })
+    }
+    

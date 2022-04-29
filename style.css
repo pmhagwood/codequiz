@@ -1,49 +1,114 @@
+* {
+    box-sizing: border-box;
+}
+
 /* Change the background color of the page */
 body {
     background-color: #5770f1;
     background-image: url("images/bg-quiz.gif");
     background-size: cover;
+    margin: 0;
+    padding: 0;
 }
 /* drop the header down a bit */
 header {
-    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
 }
 /* background for the header bar and center text */
 #headerbar {
-    border:2px solid #788df2;
-    border-radius: 25px;
-    margin: 0px 20px;
-    background-image: linear-gradient( rgba(86,111,241,1),rgba(49,79,229,1));
+    /* display: flex;
+    flex-direction: column; */
+    width: 100vw;
+    background-color: #253970;
+    margin: 0;
+    opacity: .8;
+    border-bottom: 8px solid #1e233e;
+    font-family: 'Catamaran', sans-serif;
 }
 /* Center and size h1 */
 #headerbar  h1 {
         text-align: center;
-        padding:10px;
+        padding:2rem 0 3rem 0;
         font-size:29px;
         width: 90%;
-        border-bottom: 1px solid #788df2;
         margin: 0px auto;
         font-family: 'Bangers', cursive;
         letter-spacing: .1em;
+        width: 100%;
+}
+
+#baritems {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: baseline;
+    padding: 0 4rem;
+}
+
+#highscore {
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+}
+
+#highscore > div {
+    align-self: center;
+}
+
+#timer {
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+}
+
+#timer > div {
+    align-self: center;
 }
 /* style header link */
 #enterhighscore a {
     text-decoration: none;
     color: whitesmoke;
+    font-size: .8em;
 }
 #enterhighscore a:hover {
     color: #cad1f5;
 }
 /* small title size */
 .smalltitle {
-    font-size: 10px;
+    font-size: 12px;
     color: aliceblue;
+    position: relative;
+}
+.smalltitle::after {
+    content:url('/images/lightbulb-lessmall.png');
+    position: absolute;
+    transform: translateY(-100%);
+    left: 05%;
+    top: 0;
+}
+.smalltitle2 {
+    font-size: 12px;
+    color: aliceblue;
+    position: relative;
+}
+.smalltitle2::after {
+    content:url('/images/timer.png');
+    position: absolute;
+    transform: translateY(-100%);
+    left: 30%;
+    top: 0;
 }
 /* Style the questions */
 #questions {
     font-size: 24px;
-    padding:20px 0px 40px 0px;
+    padding:2rem;
     line-height: 1.4em;
+    background-color: white;
+    border-radius: 1rem;
+    font-family: 'Catamaran', sans-serif;
+    margin-bottom: 2rem;
+    box-shadow: 6px 6px  #4052ac ;
 }
 #questions p:nth-child(3) {
     text-align: center;
@@ -57,7 +122,7 @@ header {
     padding-bottom: 10px;
 }
 .entertimer {
-    font-size: 26px;
+    font-size: 1.6em;
     color: aliceblue;
     padding-bottom: 10px;
 }
@@ -65,35 +130,46 @@ header {
     visibility: hidden;
 }
 #feedback {
-    color: rgb(84, 84, 84);
+    color:#1e233e;
+    background-color: white;
+    padding: .5rem;
     margin-top: 20px;
     text-align: center;
     font-size: 16px;
+    max-width: 200px;
+    box-shadow: 6px 6px  #4052ac ;
+    align-self: center;
+    opacity: 0;
+    transition: .4s;
+}
+
+.feedbackview {
+    opacity: 1;
 }
 
 /* Content Styling */
 
 #maincontent {
-    border:2px solid #eeeff5;
-    border-radius: 25px;
-    background-color: white;
-    padding: 15px;
+    display: flex;
+    flex-direction: column;
 }
 #highscores h2 {
     margin: 10px 0px 30px 0px;
+    font-family: 'Catamaran', sans-serif;
+    color:white;
 }
 
 /* indent questions */
 #answer1, #answer2, #answer3, #answer4 {
-    margin-left: 5%;
+    margin: .5rem 0 0 .5rem;
 }
 /* style buttons */
 #button {
     display: block;
     text-align: center;
 }
-#button button {
-    background-color: #304fe5;
+/* #button button {
+    background-color: white;
     border:2px solid #1e233e;
     color: white;
     padding:8px 26px;
@@ -104,76 +180,77 @@ header {
     margin: 4px 2px;
     transition-duration: 0.4s;
     cursor: pointer;
-}
+} */
 #button button:hover {
     background-color: #516bed;
     color:white;
 }
 #answer1 button, #answer2 button, #answer3 button, #answer4 button, #highscores button, #submitinitials {
-    background-color: #304fe5;
-    border:2px solid #1e233e;
-    color: white;
+    background-color: white;
+    border:2px solid #5a69bb;
+    font-family: 'Catamaran', sans-serif;
+    box-shadow: 6px 6px  #4052ac ;
+    color: black;
+    width: 100%;
     padding:8px 26px;
     border-radius: 8px;
     font-weight: bold;
     display: inline-block;
     text-decoration: none;
-    margin: 4px 2px;
+    margin: .3rem 0;
     transition-duration: 0.4s;
     cursor: pointer;
 }
-#answer1 button:hover {
+#answer1 button:hover,
+#answer2 button:hover,
+#answer3 button:hover,
+#answer4 button:hover,
+#highscores button:hover,
+#highscoreform button:hover
+ {
     background-color: #516bed;
     color:white;
 }
-#answer2 button:hover {
-    background-color: #516bed;
-    color:white;
+
+#answer1 button:visited,
+#answer2 button:visited,
+#answer3 button:visited,
+#answer4 button:visited
+ {
+    border: none;
 }
-#answer3 button:hover {
-    background-color: #516bed;
-    color:white;
-}
-#answer4 button:hover {
-    background-color: #516bed;
-    color:white;
-}
-#highscores button:hover {
-    background-color: #516bed;
-    color:white;
-}
-#highscoreform button:hover {
-    background-color: #516bed;
-    color:white;
-}
+
 #highscores button {
     margin-right:10px;
 }
 #submitinitials {
-    margin-left:10px;
+    margin: 1.5rem 0;
+}
+#initials > label {
+    color: white;
+    padding-bottom: .5rem;
 }
 
+#initialstext {
+    padding: .4rem;
+    border-radius: .4rem;
+    border: none;
+    text-align: center;
+}
 /* HighScores List Look */
 #hslist {
     list-style-image: url('images/lightbulb-small.png');
     font-size: 1.4em;
-    color:#354edc;
+    color:#cad1f5;
 }
 
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
     /* proper size of header bar for larger screens */
-    #headerbar {
-        width: 900px;
-        margin:0px auto;
-    }
+
     /* position the timer to the right on larger screens */
-    #timer {
-        position: absolute;
-        right:0;
-        padding-right:50px;
-    }
+    
     #maincontent {
         width:800px;
         margin:0px auto;
@@ -182,6 +259,13 @@ header {
 
 /* Small devices (mobile, 768px and down) */
 @media only screen and (max-width: 765px) {
+    #baritems {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: baseline;
+        padding: 0 2rem;
+    }
     #maincontent {
         margin:0px 20px;
     }
