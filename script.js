@@ -228,7 +228,7 @@ submitBtn.addEventListener("click", function(event) {
 // When a button inside the maincontent is clicked
 mainContentEl.addEventListener('click', function(event){
     event.preventDefault();
-    var element = event.target;
+    let element = event.target;
     // If that element button is clicked...
     if(event.target.matches("#submitinitials")){
         return

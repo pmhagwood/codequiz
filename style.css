@@ -139,12 +139,12 @@ header {
     max-width: 200px;
     box-shadow: 6px 6px  #4052ac ;
     align-self: center;
-    opacity: 0;
-    transition: .4s;
+    opacity: 1;
 }
 
 .feedbackview {
     opacity: 1;
+    background-color: #4052ac;
 }
 
 /* Content Styling */
