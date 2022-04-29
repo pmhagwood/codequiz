@@ -74,7 +74,8 @@ function init(){
     var storedScores = JSON.parse(localStorage.getItem("scoresList"));
 
     if(storedScores !== null) {
-        scoresList = storedScores;
+
+        scoresList.push(storedScores);
     }
     // renderHighscores();
 }
@@ -244,6 +245,7 @@ mainContentEl.addEventListener('click', function(event){
                     feedbackEl.textContent = "";
                     feedbackEl.classList.remove('feedbackview');
                    }, 1500);
+
                 nextQuestion();
             } else {
                 currentTime = currentTime - 10;
@@ -256,6 +258,7 @@ mainContentEl.addEventListener('click', function(event){
                     feedbackEl.textContent = "";
                     feedbackEl.classList.remove('feedbackview')
                    }, 1500);
+
                 nextQuestion();
             } 
     }
