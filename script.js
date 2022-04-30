@@ -1,4 +1,4 @@
-var quiz = {
+const quiz = {
     questions : [
         "Which output method is most effective for debugging code in the browser?",
         "What character is used to separate JavaScript statements?",
@@ -242,8 +242,8 @@ mainContentEl.addEventListener('click', function(event){
                 feedbackEl.classList.add('feedbackview');
                 feedbackEl.textContent = "Correct!";
                 setTimeout(function(){
-                    feedbackEl.textContent = "";
                     feedbackEl.classList.remove('feedbackview');
+                    feedbackEl.textContent = "";
                    }, 1500);
 
                 nextQuestion();
@@ -255,8 +255,8 @@ mainContentEl.addEventListener('click', function(event){
                 feedbackEl.classList.add('feedbackview')
                 feedbackEl.textContent = "InCorrect";
                 setTimeout(function(){
-                    feedbackEl.textContent = "";
                     feedbackEl.classList.remove('feedbackview')
+                    feedbackEl.textContent = "";
                    }, 1500);
 
                 nextQuestion();
