@@ -6,7 +6,7 @@ var clearBtn = document.getElementById('clearhs');
 
 // array to store scores
 var scores = [];
-
+console.log("the scores from js2 are ", scores)
 // initialize the scores array
 init();
 // function to initialize the scores array
@@ -16,7 +16,8 @@ function init() {
     console.log('Scores list ', storedScores);
     // If scores were found, update scores array with it. 
     if(storedScores !== null){
-        scores = storedScores;
+        
+        scores = scores.concat(storedScores);
     }
     renderHighscores();
 }
@@ -25,11 +26,10 @@ function init() {
 function renderHighscores() {
 // set html to nothing
     hsListEl.innerHTML = "";
-
+    console.log("scores array is : ", scores)
     // render the content into paragraphs
     for(var i = 0; i < scores.length; i++) {
         var score = scores[i];
-        console.log("score is ", score);
         var li = document.createElement("li");
         li.textContent = score;
         li.setAttribute("data-index", i);

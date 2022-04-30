@@ -38,7 +38,7 @@ var currentTime;
 var currentTimebtn = document.createElement('BUTTON');
 
 // Target the content div
-var questionEl = document.getElementById('questions');
+var questionEl = document.querySelector('#questions');
 var answer1El = document.getElementById('answer1');
 var answer2El = document.getElementById('answer2');
 var answer3El = document.getElementById('answer3');
@@ -48,7 +48,6 @@ var highscoreEl = document.getElementById('highscoreform');
 var checktimeEl = document.getElementById('button');
 var mainContentEl = document.querySelector('#maincontent');
 var feedbackEl = document.getElementById('feedback');
-console.log('the feedback element is ', feedbackEl);
 // Target the form and form button
 var initialsEl = document.querySelector('#initialstext');
 var submitBtn = document.querySelector('#submitinitials');
@@ -66,16 +65,16 @@ var seconds;
 var timerInterval;
 var score;
 // store the high scores
-var scoresList = [];
+let scoresList = [];
 // This is where get scores from local storage and push in a new one. If I don't use Push, it breaks the array and get an error
 init();
 // this gets the scores from storage and pushes them into the array, keeping it an array.
 function init(){
     var storedScores = JSON.parse(localStorage.getItem("scoresList"));
-
+    console.log("stored scores from first JS ", storedScores)
     if(storedScores !== null) {
-
-        scoresList.push(storedScores);
+        scoresList.push(...storedScores);
+        
     }
     // renderHighscores();
 }
@@ -172,8 +171,12 @@ function nextQuestion() {
 //End Game
 function endGame(){
     clearInterval(timerInterval);
-    feedbackEl.textContent = "";
-    // mainContentEl.removeEventListener('click');
+    feedbackEl.classList.add('feedbackview');
+    feedbackEl.textContent = "Congratulations!";
+                setTimeout(function(){
+                    feedbackEl.classList.remove('feedbackview');
+                    feedbackEl.textContent = "";
+                   }, 2000);
     score = currentTime;
     button1 = document.getElementById('button1');
     button1.remove();
@@ -183,7 +186,7 @@ function endGame(){
     button3.remove();
     button4 = document.getElementById('button4');
     button4.remove();
-    console.log('score is: ', score);
+    // console.log('score is: ', score);
     timeEl.textContent = score;
     questionEl.textContent = "Game Over"
     questionEl.setAttribute('style', 'font-size:45px; text-align:center;');
@@ -206,6 +209,7 @@ submitBtn.addEventListener("click", function(event) {
     // get the value for initials
     var initialsEl = document.querySelector('#initialstext').value;
     // put initials and score into array
+    console.log("scoresList = ", scoresList)
     scoresList.push(initialsEl + " : score " + score);
     // if it is empty, show messages
     if (initialsEl === "") {
@@ -264,12 +268,6 @@ mainContentEl.addEventListener('click', function(event){
     }
 });
 
-// function clearFeedback (){
-//     setTimeout(function(){
-//         feedbackEl.textContent = "";
-//         nextQuestion();
-//        }, 1000);
-// };
 
 
 // create timer
@@ -306,7 +304,7 @@ function renderHighscores() {
         // render the content into paragraphs
         for(var i = 0; i < scores.length; i++) {
             var score = scoresList[i];
-            console.log("score is ", score);
+            // console.log("score is ", score);
             var li = document.createElement("li");
             li.textContent = score;
             li.setAttribute("data-index", i);
@@ -315,14 +313,5 @@ function renderHighscores() {
     
         }
     }
-    if(clearBtn){
-        clearBtn.addEventListener('click', function(event){
-            let element = event.target;
-        
-            if(element.matches("button") === true){
-                localStorage.clear();
-                location.reload();
-            }
-        })
-    }
+
     

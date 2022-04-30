@@ -235,8 +235,9 @@ header {
 }
 #initials > label {
     color: white;
-    padding-bottom: .5rem;
+    padding: 0 .5rem .5rem 0;
 }
+
 
 #initialstext {
     padding: .4rem;
