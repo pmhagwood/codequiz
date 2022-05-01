@@ -47,7 +47,7 @@ var buttonEl = document.getElementById('button');
 var highscoreEl = document.getElementById('highscoreform');
 var checktimeEl = document.getElementById('button');
 var mainContentEl = document.querySelector('#maincontent');
-var feedbackEl = document.getElementById('feedback');
+var feedbackEl = document.querySelector('.feedback');
 // Target the form and form button
 var initialsEl = document.querySelector('#initialstext');
 var submitBtn = document.querySelector('#submitinitials');

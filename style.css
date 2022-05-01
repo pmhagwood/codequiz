@@ -129,11 +129,9 @@ header {
 #highscoreform {
     visibility: hidden;
 }
-.feedbackview {
-    opacity: 1 !important;
-}
 
-#feedback {
+
+.feedback {
     color:#1e233e;
     background-color: white;
     padding: .5rem;
@@ -152,6 +150,9 @@ header {
     transition: all .02s;
 }
 
+.feedbackview {
+    opacity: 1;
+}
 
 
 /* Content Styling */
